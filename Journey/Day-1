@@ -1,0 +1,16 @@
+I finnaly felt I was a prepared to take up a very challening task .Take a guess .
+Yes finnaly a worthy challange our battles will be legendary.
+I have decided to build a ...*Drum Roll*... Interpreter in Python .
+I am a begginer in respect to all aspects will i be able to do it or will i quit defeatd i dont know .
+I have given a look over how compiler and Interpreter works at article at geek for geek , and inside pvm
+First thing first what is interpreter or compiler?
+    Simply if a translator translates a source program into machine language, it is a compiler. If a translator processes and executes the source program without translating it into machine language first, it is an interpreter.
+With the gained knowledge I decided to code a simple interpreter for a basic expression of adding 2 single digit Integers .
+
+To achieve this :
+I need to get input
+I need to read the input
+We first need to do Lexical analysis
+    We need to break the input into components called Tokens
+    A Token is an object which has value and a type 
+

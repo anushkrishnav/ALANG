@@ -1,0 +1,40 @@
+Introduction of Lexical Analysis
+Lexical Analysis is the first phase of compiler also known as scanner. It converts the High level input program into a sequence of Tokens.
+
+Lexical Analysis can be implemented with the Deterministic finite Automata.
+The output is a sequence of tokens that is sent to the parser for syntax analysis
+
+
+What is a token?
+A lexical token is a sequence of characters that can be treated as a unit in the grammar of the programming languages.
+Example of tokens:
+
+Type token (id, number, real, . . . )
+Punctuation tokens (IF, void, return, . . . )
+Alphabetic tokens (keywords)
+Keywords; Examples-for, while, if etc.
+Identifier; Examples-Variable name, function name etc.
+Operators; Examples '+', '++', '-' etc.
+Separators; Examples ',' ';' etc
+Example of Non-Tokens:
+
+Comments, preprocessor directive, macros, blanks, tabs, newline  etc
+Lexeme: The sequence of characters matched by a pattern to form
+the corresponding token or a sequence of input characters that comprises a single token is called a lexeme. eg- “float”, “abs_zero_Kelvin”, “=”, “-”, “273”, “;” .
+
+How Lexical Analyzer functions
+
+1. Tokenization .i.e Dividing the program into valid tokens.
+2. Remove white space characters.
+3. Remove comments.
+4. It also provides help in generating error message by providing row number and column number.
+
+la
+
+The lexical analyzer identifies the error with the help of automation machine and the grammar of  the given language on which it is based like C , C++ and gives row number and column number of the error.
+Suppose we pass a statement through lexical analyzer –
+
+a = b + c ;                It will generate token sequence like this:
+
+id=id+id;                 Where each id reference to it’s variable in the symbol table referencing all details
+
