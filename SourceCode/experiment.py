@@ -2,31 +2,8 @@
 #
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER, PLUS, MINUS, EOF = 'INTEGER', 'PLUS','MINUS' ,'EOF'
-
-
-class Token(object):
-    def __init__(self, type, value):
-        # token type: INTEGER, PLUS, or EOF
-        self.type = type
-        # token value: 0, 1, 2. 3, 4, 5, 6, 7, 8, 9, '+', or None
-        self.value = value
-
-    def __str__(self):
-        """String representation of the class instance.
-
-        Examples:
-            Token(INTEGER, 3)
-            Token(PLUS '+')
-        """
-        return 'Token({type}, {value})'.format(
-            type=self.type,
-            value=repr(self.value)
-        )
-
-    def __repr__(self):
-        return self.__str__()
-
+INTEGER, PLUS, EOF,MINUS = 'INTEGER', 'PLUS', 'EOF','MINUS'
+from Tokenf import Token
 
 class Interpreter(object):
     def __init__(self, text):
@@ -57,7 +34,7 @@ class Interpreter(object):
         # get a character at the position self.pos and decide
         # what token to create based on the single character
         current_char = text[self.pos]
-        print(current_char)
+
         # if the character is a digit then convert it to
         # integer, create an INTEGER token, increment self.pos
         # index to point to the next character after the digit,
@@ -71,7 +48,7 @@ class Interpreter(object):
             token = Token(PLUS, current_char)
             self.pos += 1
             return token
-        else:
+        if current_char == '-':
             token = Token(MINUS, current_char)
             self.pos += 1
             return token
@@ -99,8 +76,10 @@ class Interpreter(object):
 
         # we expect the current token to be a '+' token
         op = self.current_token
-        self.eat(PLUS)    
- 
+        if op.value=='+':
+            self.eat(PLUS)
+        if op.value=='-':
+            self.eat(MINUS)
 
         # we expect the current token to be a single-digit integer
         right = self.current_token
@@ -112,8 +91,13 @@ class Interpreter(object):
         # has been successfully found and the method can just
         # return the result of adding two integers, thus
         # effectively interpreting client input
-        result = left.value + right.value
-        return result
+        if op.value=='-':
+            result = left.value - right.value
+            return result
+
+        if op.value=='+':
+            result = left.value + right.value
+            return result
 
 
 def main():
@@ -121,7 +105,7 @@ def main():
         try:
             # To run under Python3 replace 'raw_input' call
             # with 'input'
-            text = input('calc> ')
+            text = input('code> ')
         except EOFError:
             break
         if not text:
