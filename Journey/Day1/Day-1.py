@@ -3,7 +3,7 @@ from Token import Token
 # Token types
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER, PLUS, EOF,MINUS = 'INTEGER', 'PLUS', 'EOF','MINUS'
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
 class Interpreter(object):
     def __init__(self, text):
         # client string input
@@ -13,6 +13,26 @@ class Interpreter(object):
         # current token instance
         self.current_token = None
 
+    def calc(self,value,left,right):
+        if value=='-':
+            result = left.value - right.value
+            return result
+
+        if value=='+':
+            result = left.value + right.value
+            return result
+        
+        if value=='*':
+            result = left.value * right.value
+            return result
+        
+        if value=='/':
+            result = left.value / right.value
+            return result
+        
+        if value=='**':
+            result = left.value ** right.value
+            return result
     def error(self):
         raise Exception('Error parsing input')
 
@@ -51,12 +71,20 @@ class Interpreter(object):
             token = Token(MINUS, current_char)
             self.pos += 1
             return token
+        if current_char == '*':
+            token = Token(MUL, current_char)
+            self.pos += 1
+            return token
+        if current_char == '/':
+            token = Token(DIV, current_char)
+            self.pos += 1
+            return token     
 
         self.error()
 
-    def eat(self, token_type):
+    def remv(self, token_type):
         # compare the current token type with the passed token
-        # type and if they match then "eat" the current token
+        # type and if they match then "remv" the current token
         # and assign the next token to the self.current_token,
         # otherwise raise an exception.
         if self.current_token.type == token_type:
@@ -71,32 +99,31 @@ class Interpreter(object):
 
         # we expect the current token to be a single-digit integer
         left = self.current_token
-        self.eat(INTEGER)
+        self.remv(INTEGER)
 
-        # we expect the current token to be a '+' token
+        # we expect the current token to be a operator token
         op = self.current_token
         if op.value=='+':
-            self.eat(PLUS)
+            self.remv(PLUS)
         if op.value=='-':
-            self.eat(MINUS)
+            self.remv(MINUS)
+        if op.value=='*':
+            self.remv(MUL)
+        if op.value=='/':
+            self.remv(DIV)
 
         # we expect the current token to be a single-digit integer
         right = self.current_token
-        self.eat(INTEGER)
+        self.remv(INTEGER)
         # after the above call the self.current_token is set to
         # EOF token
-
-        # at this point INTEGER PLUS INTEGER sequence of tokens
+        
+        return self.calc(op.value,left,right)
+        # at this point INTEGER Operator INTEGER sequence of tokens
         # has been successfully found and the method can just
-        # return the result of adding two integers, thus
+        # return the result of opeartion two integers, thus
         # effectively interpreting client input
-        if op.value=='-':
-            result = left.value - right.value
-            return result
-
-        if op.value=='+':
-            result = left.value + right.value
-            return result
+    
 
 
 def main():
