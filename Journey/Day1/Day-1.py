@@ -1,35 +1,12 @@
+from Token import Token
+
 # Token types
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER, PLUS, EOF = 'INTEGER', 'PLUS', 'EOF'
-
-
-class Token(object):
-    def __init__(self, type, value):
-        # token type: INTEGER, PLUS, or EOF
-        self.type = type
-        # token value: 0, 1, 2. 3, 4, 5, 6, 7, 8, 9, '+', or None
-        self.value = value
-
-    def __str__(self):
-        """String representation of the class instance.
-
-        Examples:
-            Token(INTEGER, 3)
-            Token(PLUS '+')
-        """
-        return 'Token({type}, {value})'.format(
-            type=self.type,
-            value=repr(self.value)
-        )
-
-    def __repr__(self):
-        return self.__str__()
-
-
+INTEGER, PLUS, EOF,MINUS = 'INTEGER', 'PLUS', 'EOF','MINUS'
 class Interpreter(object):
     def __init__(self, text):
-        # client string input, e.g. "3+5"
+        # client string input
         self.text = text
         # self.pos is an index into self.text
         self.pos = 0
@@ -70,6 +47,10 @@ class Interpreter(object):
             token = Token(PLUS, current_char)
             self.pos += 1
             return token
+        if current_char == '-':
+            token = Token(MINUS, current_char)
+            self.pos += 1
+            return token
 
         self.error()
 
@@ -94,7 +75,10 @@ class Interpreter(object):
 
         # we expect the current token to be a '+' token
         op = self.current_token
-        self.eat(PLUS)
+        if op.value=='+':
+            self.eat(PLUS)
+        if op.value=='-':
+            self.eat(MINUS)
 
         # we expect the current token to be a single-digit integer
         right = self.current_token
@@ -106,14 +90,21 @@ class Interpreter(object):
         # has been successfully found and the method can just
         # return the result of adding two integers, thus
         # effectively interpreting client input
-        result = left.value + right.value
-        return result
+        if op.value=='-':
+            result = left.value - right.value
+            return result
+
+        if op.value=='+':
+            result = left.value + right.value
+            return result
 
 
 def main():
     while True:
         try:
-            text = input('calc> ')
+            # To run under Python3 replace 'raw_input' call
+            # with 'input'
+            text = input('code> ')
         except EOFError:
             break
         if not text:
