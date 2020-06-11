@@ -13,7 +13,7 @@ class Interpreter(object):
         # current token instance
         self.current_token = None
 
-    def calc(self,value,left,right):
+    def Calc(self,value,left,right):
         if value=='-':
             result = left.value - right.value
             return result
@@ -33,10 +33,10 @@ class Interpreter(object):
         if value=='**':
             result = left.value ** right.value
             return result
-    def error(self):
+    def Error(self):
         raise Exception('Error parsing input')
 
-    def get_next_token(self):
+    def GetNextToken(self):
         """Lexical analyzer (also known as scanner or tokenizer)
 
         This method is responsible for breaking a sentence
@@ -80,45 +80,45 @@ class Interpreter(object):
             self.pos += 1
             return token     
 
-        self.error()
+        self.Error()
 
-    def remv(self, token_type):
+    def Remv(self, token_type):
         # compare the current token type with the passed token
-        # type and if they match then "remv" the current token
+        # type and if they match then "Remv" the current token
         # and assign the next token to the self.current_token,
         # otherwise raise an exception.
         if self.current_token.type == token_type:
-            self.current_token = self.get_next_token()
+            self.current_token = self.GetNextToken()
         else:
-            self.error()
+            self.Error()
 
-    def expr(self):
-        """expr -> INTEGER PLUS INTEGER"""
+    def Start(self):
+        """Start -> INTEGER PLUS INTEGER"""
         # set current token to the first token taken from the input
-        self.current_token = self.get_next_token()
+        self.current_token = self.GetNextToken()
 
         # we expect the current token to be a single-digit integer
         left = self.current_token
-        self.remv(INTEGER)
+        self.Remv(INTEGER)
 
         # we expect the current token to be a operator token
         op = self.current_token
         if op.value=='+':
-            self.remv(PLUS)
+            self.Remv(PLUS)
         if op.value=='-':
-            self.remv(MINUS)
+            self.Remv(MINUS)
         if op.value=='*':
-            self.remv(MUL)
+            self.Remv(MUL)
         if op.value=='/':
-            self.remv(DIV)
+            self.Remv(DIV)
 
         # we expect the current token to be a single-digit integer
         right = self.current_token
-        self.remv(INTEGER)
+        self.Remv(INTEGER)
         # after the above call the self.current_token is set to
         # EOF token
         
-        return self.calc(op.value,left,right)
+        return self.Calc(op.value,left,right)
         # at this point INTEGER Operator INTEGER sequence of tokens
         # has been successfully found and the method can just
         # return the result of opeartion two integers, thus
@@ -126,7 +126,7 @@ class Interpreter(object):
     
 
 
-def main():
+def Main():
     while True:
         try:
             # To run under Python3 replace 'raw_input' call
@@ -137,9 +137,9 @@ def main():
         if not text:
             continue
         interpreter = Interpreter(text)
-        result = interpreter.expr()
+        result = interpreter.Start()
         print(result)
 
 
 if __name__ == '__main__':
-    main()
+    Main()

@@ -136,7 +136,7 @@ def main():
             break
         if not text:
             continue
-        interpreter = Interpreter(text)
+        interpreter = Interpreter(text.strip())
         result = interpreter.expr()
         print(result)
 
