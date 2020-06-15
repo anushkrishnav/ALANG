@@ -15,6 +15,10 @@ class Interpreter(object):
         # current token instance
         self.current_token = None
         self.current_char = self.text[self.pos]
+##########################################################
+    # Lexer code                                             #
+    ##########################################################
+    
 
     def error(self):
         raise Exception('Error parsing input')
@@ -35,6 +39,7 @@ class Interpreter(object):
         """Return a (multidigit) integer consumed from the input."""
         result = ''
         while self.current_char is not None and self.current_char.isdigit():
+
             result += self.current_char
             self.advance()
         return int(result)
@@ -58,15 +63,12 @@ class Interpreter(object):
                 token=Token(OPERATORS.get(self.current_char),self.current_char)
                 self.advance()
                 return token
-
-            '''if self.current_char == '-':
-                self.advance()
-                return Token(MINUS, '-')
-'''
             self.error()
 
         return Token(EOF, None)
-
+ ##########################################################
+    # Parser / Interpreter code                              
+    ##########################################################
     def eat(self, token_type):
         # compare the current token type with the passed token
         # type and if they match then "eat" the current token
@@ -76,45 +78,48 @@ class Interpreter(object):
             self.current_token = self.get_next_token()
         else:
             self.error()
-    def calc(self,value,left,right):
+    def calc(self,left,value,right):
         if value=='-':
-            result = left.value - right.value
+            result = left - right
             return result
 
         if value=='+':
-            result = left.value + right.value
+            result = left + right
             return result
         
         if value=='*':
-            result = left.value * right.value
+            result = left * right
             return result
         
         if value=='/':
-            result = left.value / right.value
+            if right==0:
+                raise ValueError("You cannot divide a number by 0")
+            result = left / right
             return result
         
         if value=='**':
-            result = left.value ** right.value
+            result = left ** right
             return result
-
-   
+    def term(self):
+        """Return an INTEGER token value"""
+        token=self.current_token
+        self.eat(INTEGER)
+        return token.value
+    """------------------Parser / Interpreter ---------------------------"""
     def expr(self):
-
+        #art expression parser/interpreter
         # set current token to the first token taken from the input
         self.current_token = self.get_next_token()
+        result=self.term()
+        while self.current_token.type in OPERATORS.values():
+            token=self.current_token
+            if self.current_token.type in OPERATORS.values():
+                op=self.current_token.value
+                self.eat(self.current_token.type)
+                term3=self.term()
+                result=self.calc(result,op,term3)
 
         # we expect the current token to be an integer
-        left = self.current_token
-        self.eat(INTEGER)
-
-        # we expect the current token to be either a '+' or '-'
-        op = self.current_token
-        if op.type in OPERATORS.values():
-            self.eat(op.type)
-
-        # we expect the current token to be an integer
-        right = self.current_token
-        self.eat(INTEGER)
         # after the above call the self.current_token is set to
         # EOF token
 
@@ -123,7 +128,7 @@ class Interpreter(object):
         # has been successfully found and the method can just
         # return the result of adding or subtracting two integers,
         # thus effectively interpreting client input
-        return self.calc(op.value,left,right)
+        return result
 
 
 def main():
