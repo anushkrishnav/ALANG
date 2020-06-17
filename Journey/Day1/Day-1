@@ -32,4 +32,3 @@ This method verifies that the sequence of tokens does indeed correspond to the e
  After it’s successfully confirmed the structure, it generates the result by operationg on  the value of the token on the left side of the OPERATOR and the right side of the OPERATOR, thus successfully interpreting the arithmetic expression we passed to the interpreter.
 
 
-
