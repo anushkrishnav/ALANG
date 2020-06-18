@@ -110,14 +110,17 @@ class Interpreter(object):
         #art expression parser/interpreter
         # set current token to the first token taken from the input
         self.current_token = self.get_next_token()
-        result=self.term()
+        t1=self.term()
         while self.current_token.type in OPERATORS.values():
             token=self.current_token
-            if self.current_token.type in OPERATORS.values():
-                op=self.current_token.value
+            if token.type in OPERATORS.values():
+                op=token.value
                 self.eat(self.current_token.type)
+                if self.current_token.value =='*':
+                    op+='*'
+                    self.eat(self.current_token.type)
                 term3=self.term()
-                result=self.calc(result,op,term3)
+                result=self.calc(t1,op,term3)
 
         # we expect the current token to be an integer
         # after the above call the self.current_token is set to

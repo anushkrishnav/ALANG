@@ -105,9 +105,6 @@ class Interpreter(object):
         token=self.current_token
         self.eat(INTEGER)
         return token.value
-    def pow(self):
-        pass
-
     """------------------Parser / Interpreter ---------------------------"""
     def expr(self):
         #art expression parser/interpreter
