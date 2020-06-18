@@ -38,3 +38,4 @@ a = b + c ;                It will generate token sequence like this:
 
 id=id+id;                 Where each id reference to it’s variable in the symbol table referencing all details
 
+A lexeme is a sequence of characters that form a token.
