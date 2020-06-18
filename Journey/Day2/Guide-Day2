@@ -1,0 +1,51 @@
+Aim for the day
+Handle whitespace characters anywhere in the input string
+Consume multi-digit integers from the input
+Modify the code to interpret expressions containing an arbitrary number of operators, for example “9 - 5 + 3 + 11”
+
+how it was done .
+new methond called advance was created to increment the pos pointer
+new method created to skip white space char in the input
+new method called integer created to all multi-digit integer
+    working :
+        in the lexical analyser when the current char is a digit we call the integer()
+        we can use string concatination to get our work done
+        we create a new string variable result 
+        we will concanate it and advance the pointer and it will go on .
+        we will concatnate rest of the digit to the result string .
+        we will loop through the input until a non digit charc is encountered.
+        when a non digit character is encountered we will exit the loop.
+        and we will return the sresult striing to be tokenised as a multi digit integer.
+
+To handle a expression with arbitrary number of operators we can make use of a syntax diagram 
+A syntax diagram is a graphical representation of a programming language’s syntax rules. Basically, a syntax diagram visually shows you which statements are allowed in your programming language and which are not.
+    working:
+        new method called term introduced
+        term() will take in the current token and return the token value and eat(call next token) it  
+        we will modify our expr in the following way:
+        we can be sure that the first char set is always an digit
+        R will call the term()
+        modify the while loop to loop through as long as the current token type is in  OPERATOR.
+        save the current toke in variable token and eat() .
+        Use a if case to accomadate power operator
+        get the the next integer .
+        return calc(L,operator,r)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
