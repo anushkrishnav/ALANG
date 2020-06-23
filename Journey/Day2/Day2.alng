@@ -116,11 +116,13 @@ class Interpreter(object):
             if token.type in OPERATORS.values():
                 op=token.value
                 self.eat(self.current_token.type)
-                if self.current_token.value =='*':
-                    op+='*'
-                    self.eat(self.current_token.type)
+                #if self.current_token.value =='*':
+                 #   op+='*'
+                  #  self.eat(self.current_token.type)
                 term3=self.term()
+                print(t1,op,term3)
                 result=self.calc(t1,op,term3)
+                t1=result
 
         # we expect the current token to be an integer
         # after the above call the self.current_token is set to
