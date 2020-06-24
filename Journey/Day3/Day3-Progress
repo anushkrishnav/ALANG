@@ -18,7 +18,7 @@ Why use Context Grammer :
 let's get started 
 So below is the grammar that is going to describe arithmetic exp like 2-1+4-2(It can be any expression) 
 
-    expr   : factor((PLUS|DIV)factor)*
+    expr   : factor((PLUS|MINUS)factor)*
     factor : INTEGER
 
     Components of the grammar used 
@@ -31,10 +31,10 @@ So below is the grammar that is going to describe arithmetic exp like 2-1+4-2(It
       An expr can be a factor optionally followed by an addition or subtraction operator followed by another factor, which in turn is optionally followed by a addition or subtraction operator followed by another factor and so on and so forth
 
 Aim for the day :
-    Separate Lexer from the Interpreter since Lexer doesn't really belong to the Interpreter class.
-    Modify the constructor accordingly
-    Make sure error handling is done for the lexer and the interpreter.
-    I follow one file on class principle and I strongly believe it helps readability. Feel free to have all the classes in a single file. 
+    -> Separate Lexer from the Interpreter since Lexer doesn't really belong to the Interpreter class.
+    -> Modify the constructor accordingly
+    -> Make sure error handling is done for the lexer and the interpreter.
+    -> I follow "one file one class" principle and I strongly believe it helps readability. Feel free to have all the classes in a single file. 
 
 
 Reference :
