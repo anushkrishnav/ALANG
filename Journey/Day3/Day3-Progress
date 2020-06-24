@@ -1,0 +1,42 @@
+Today I have decided to spend time and improve what I have built till now.
+At the same time look into context-free grammar 
+
+Context-free grammar :
+Context-free grammars (CFGs) are used to describe context-free languages. A context-free grammar is a set of recursive rules used to generate patterns of strings. Context-free grammar can describe all regular languages and more, but they cannot describe all possible languages.
+
+Grammar :
+    A grammar defines a language by explaining what sentences it can form. This is how you can derive an arithmetic expression using the grammar: first, you begin with the start symbol expr and then repeatedly replace a non-terminal by the body of a rule for that non-terminal until you have generated a sentence consisting solely of terminals. Those sentences form a language defined by the grammar.
+    Good grammar is required to help you form a good syntax formation.
+    One must be able to derive a particular arithmetic exp from the grammar.
+
+Why use Context Grammer :
+    I often get confused between syntax diagrams or Grammars,As I started learning more and more on compiler designs I understood Grammer is more compact than syntax diagrams.
+    Grammer also helps me to make my documentation easier
+    When you are planning to write a parser from scratch, you can make use of grammar since it's pretty easy to just convert the grammar to code.
+    hint(if you don't wish(give it a try it will be fun) to code parser from scratch just use a parser generator )
+
+let's get started 
+So below is the grammar that is going to describe arithmetic exp like 2-1+4-2(It can be any expression) 
+
+    expr   : factor((PLUS|DIV)factor)*
+    factor : INTEGER
+
+    Components of the grammar used 
+    The 2 lines that I have used are called rule/production
+    The non-terminal(expr, factor)on the left of the colon is called head
+    The sequence of terminal and non-terminal on the right side of the colon is called the body
+    The non-terminal (expr) on the left of the first rule is called the start symbol
+
+    How to read the first rule :
+      An expr can be a factor optionally followed by an addition or subtraction operator followed by another factor, which in turn is optionally followed by a addition or subtraction operator followed by another factor and so on and so forth
+
+Aim for the day :
+    Separate Lexer from the Interpreter since Lexer doesn't really belong to the Interpreter class.
+    Modify the constructor accordingly
+    Make sure error handling is done for the lexer and the interpreter.
+    I follow one file on class principle and I strongly believe it helps readability. Feel free to have all the classes in a single file. 
+
+
+Reference :
+https://brilliant.org/wiki/context-free-grammars/
+https://ruslanspivak.com/
