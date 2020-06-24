@@ -22,6 +22,7 @@ There are 3 Folders
 
 The Day-n.py file contains the code which you can pull and excecute it . It Support python 3.6+
 For the latest version of the interpreter visit [SourceCode](https://github.com/anushkrishnav/Interpreter/tree/master/SourceCode)
-Pull the Token.py file and interpreter.alang file
+Pull the [Token.py](https://github.com/anushkrishnav/Interpreter/tree/master/SourceCode/Token.py) 
+[Lexer.py](https://github.com/anushkrishnav/Interpreter/tree/master/SourceCode/Lexer.py) file and interpreter.alang file
 compile and execute the interpreter file by passing the  command below.
 $python3 interpreter.alng 
