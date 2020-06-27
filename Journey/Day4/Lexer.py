@@ -1,6 +1,6 @@
 from Token import Token
 INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
-OPERATORS={'+':PLUS,'-':MINUS,'^' :POW,'/':DIV,'*':MUL}
+OPERATORS={'+':PLUS,'-':MINUS,'**' :POW,'/':DIV,'*':MUL}
 class Lexer(object):
     def __init__(self,text):
                 # client string input, e.g. "3 + 5", "12 - 5", etc
@@ -50,7 +50,7 @@ class Lexer(object):
                 continue
 
             if self.current_char.isdigit():
-                return Token(INTEGER, int(self.Integer()))
+                return Token(INTEGER, self.Integer())
 
             if self.current_char in OPERATORS.keys():
                 token=Token(OPERATORS.get(self.current_char),self.current_char)
