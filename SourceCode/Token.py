@@ -2,7 +2,7 @@
 #
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
 class Token(object):
     def __init__(self,type,value):
         #token type: INTEGER,PLUS,EOF

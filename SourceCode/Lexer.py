@@ -1,6 +1,7 @@
 from Token import Token
-INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
-OPERATORS={'+':PLUS,'-':MINUS,'**' :POW,'/':DIV,'*':MUL}
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
+OPERATORS={'+':PLUS,'-':MINUS,'^' :POW,'/':DIV,'*':MUL}
+BRACKETS={'(':LPAR,')':RPAR}
 class Lexer(object):
     def __init__(self,text):
                 # client string input, e.g. "3 + 5", "12 - 5", etc
@@ -48,6 +49,11 @@ class Lexer(object):
             if self.current_char.isspace():
                 self.Skip_Whitespace()
                 continue
+
+            if self.current_char in BRACKETS.keys():
+                token=Token(BRACKETS.get(self.current_char),self.current_char)
+                self.Advance()
+                return token
 
             if self.current_char.isdigit():
                 return Token(INTEGER, self.Integer())
