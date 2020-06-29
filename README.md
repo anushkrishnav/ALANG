@@ -9,10 +9,10 @@ I am not going to use a virtual environment since I have decided to build this i
 
 This project is the result of inspiration from many sources.
 I have referred lots of articles, blogs and books to Understand and develop this interpreter.
-I will try to share the resources and give credit wherever possible.
-Principles of Compiler Design by Alfred V.Aho and Jeffrey D.Ullman
-[Inside The Python Virtual Machine](https://leanpub.com/insidethepythonvirtualmachine/read)
-[Let’s Build A Simple Interpreter.](https://ruslanspivak.com/lsbasi-part1/)
+I will try to share the resources and give credit wherever possible.<br/>
+[Principles of Compiler Design by Alfred V.Aho and Jeffrey D.Ullman](https://g.co/kgs/aHUCxC)<br/>
+[Inside The Python Virtual Machine](https://leanpub.com/insidethepythonvirtualmachine/read)<br/>
+[Let’s Build A Simple Interpreter.](https://ruslanspivak.com/lsbasi-part1/)<br/>
 
 
 There are 3 Folders 
