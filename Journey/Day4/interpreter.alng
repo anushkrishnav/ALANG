@@ -3,7 +3,7 @@ from Lexer import Lexer
 # Token types
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
 OPERATORS={'+':PLUS,'-':MINUS,'^' :POW,'/':DIV,'*':MUL}
 class Interpreter(object):
     def __init__(self,Lexer):
@@ -48,6 +48,7 @@ class Interpreter(object):
         if value=='^':
             result = left ** right
             return result
+
     def term(self):
         """Return an INTEGER token value"""
         result=self.current_token

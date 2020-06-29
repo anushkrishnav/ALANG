@@ -1,5 +1,5 @@
 from Token import Token
-INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL'
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
 OPERATORS={'+':PLUS,'-':MINUS,'**' :POW,'/':DIV,'*':MUL}
 class Lexer(object):
     def __init__(self,text):
