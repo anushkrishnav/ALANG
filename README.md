@@ -4,9 +4,9 @@
 
 # Creating a more English like language
 Interpreted Implemented in Python 
-## Now lets choose a name , Lazy to google cool names for new language so lets name it
-Alang(Anush Language).<br/>
-Hope it goes cause... well... it got my name for starter  XD.<br/>
+## Alang stands for (Anush Language) Unless I find a better expansion 
+<br/>
+Hope the project is good  cause... well... it got my name for starter  XD.<br/>
 I use python for the interpreter implementation since I am very comfortable with it.
 I am not going to use a virtual environment since I have decided to build this interpreter by using the inbuilt modules and self created methods.
 
