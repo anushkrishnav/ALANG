@@ -1,6 +1,9 @@
-# This Project is a result of a long time dream of creating my own interpreter using python.
-Trying to build a Language more english like
+<p align="center">
+    <img src="img/ALANG_Logo.png"><br>
+</p>
 
+# Creating a more English like language
+Interpreted Implemented in Python 
 ## Now lets choose a name , Lazy to google cool names for new language so lets name it
 Alang(Anush Language).<br/>
 Hope it goes cause... well... it got my name for starter  XD.<br/>
