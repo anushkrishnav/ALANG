@@ -3,7 +3,7 @@
 </p>
 
 # Creating a more English like language
-Interpreted Implemented in Python 
+Interpreter Implemented in Python 
 ## Alang stands for (Anush Language) Unless I find a better expansion 
 <br/>
 Hope the project is good  cause... well... it got my name for starter  XD.<br/>
