@@ -20,7 +20,7 @@ I will try to share the resources and give credit wherever possible.<br/>
 
 
 #### There are 3 Folders 
-[ActionPlan] (https://github.com/anushkrishnav/Interpreter/tree/master/ActionPlan) -> Diagrams, Concepts brief, Algorithms
+[ActionPlan](https://github.com/anushkrishnav/Interpreter/tree/master/ActionPlan) -> Diagrams, Concepts brief, Algorithms
 [Journey](https://github.com/anushkrishnav/Interpreter/tree/master/Journey)->I document and share my experiance on a day to day basis.The code will be explained . Every Day folder will contain the code built till that particular day. So that we can easily acess the improvement over time.
 
 
