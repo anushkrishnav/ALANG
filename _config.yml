@@ -1,1 +1,11 @@
-theme: jekyll-theme-architect
+title: ALANG
+email: Anush.venkatakrishna@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
+
+twitter_username: @anush_krishna_v
+github_username: @anushkrishnav
+
+# Build settings
+markdown: kramdown
