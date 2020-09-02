@@ -1,6 +1,6 @@
 from Token import Token
 from Lexer import Lexer
-from ASTree import NodeVisitor,Num,BinOP
+from ASTree import NodeVisitor,Num,BinOP,UnaryOP
 
 # Token types
 # EOF (end-of-file) token is used to indicate that
@@ -28,9 +28,14 @@ class Parser(object):
             self.current_token = self.Lexer.Get_next_token()
         else:
             self.Error()
+    
     def factor(self):
         """Return an INTEGER token value"""
         res = self.current_token
+        if res.type in (PLUS,MINUS):
+            self.eat(res.type)
+            node=UnaryOP(res,self.factor())
+            return node
         if res.type == INTEGER:
             self.eat(INTEGER)
             return Num(res)
@@ -58,10 +63,15 @@ class Parser(object):
     def expr(self):
         #art expression parser/interpreter
         # set current token to the first token taken from the input
-        if self.current_token.value=="-":
-            node=0
-        else:
-            node=self.term()
+        node=self.term()
+        while self.current_token.type in (PLUS, MINUS):
+            token = self.current_token
+            if token.type == PLUS:
+                self.eat(PLUS)
+            elif token.type == MINUS:
+                self.eat(MINUS)
+            node = BinOP(left=node, op=token, right=self.term())
+
         while self.current_token.type in OPERATORS.values() and not None:
             token=self.current_token
             self.eat(self.current_token.type)
@@ -77,11 +87,28 @@ class Parser(object):
         # thus effectively interpreting client input
         return node
     def parse(self):
-        return self.expr()
+        node= self.expr()
+        if self.current_token.type != EOF:
+            self.error()
+        return node
+class NodeVisitor(object):
+    def visit(self, node):
+        method_name = 'visit_' + type(node).__name__
+        visitor = getattr(self, method_name, self.generic_visit)
+        return visitor(node)
+
+    def generic_visit(self, node):
+        raise Exception('No visit_{} method'.format(type(node).__name__))
 
 class Interpreter(NodeVisitor):
     def __init__(self,parser):
         self.parser=parser
+    def visit_UnaryOp(self,node):
+        op=node.op.type
+        if op==PLUS:
+            return + self.visit(node.expr)
+        if op==MINUS:
+            return - self.visit(node.expr)
     def visit_BinOP(self,node):
         if node.op.value=='-':
             result = self.visit(node.left) - self.visit(node.right)
@@ -104,6 +131,8 @@ class Interpreter(NodeVisitor):
         return node.value
     def interpret(self):
         tree = self.parser.parse()
+        if tree is None:
+            return ''
         return self.visit(tree)
 
 if __name__ == '__main__':
@@ -112,7 +141,7 @@ if __name__ == '__main__':
             try:
                 # To run under Python3 replace 'raw_input' call
                 # with 'input'
-                text = input('>>> ')
+                text = input('alng >>')
             except EOFError:
                 break
             if not text:
@@ -122,6 +151,4 @@ if __name__ == '__main__':
             interpreter = Interpreter(parser)
             result = interpreter.interpret()
             print(result)
-    main()
-
-
+main()

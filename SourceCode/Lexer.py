@@ -1,4 +1,5 @@
 from Token import Token
+from interpreter import main
 INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
 OPERATORS={'+':PLUS,'-':MINUS,'^' :POW,'/':DIV,'*':MUL}
 BRACKETS={'(':LPAR,')':RPAR}
@@ -15,7 +16,8 @@ class Lexer(object):
     
 
     def Error(self):
-        raise Exception('Invalid char ')
+        print('Invalid char ')
+        main()
 
     def Advance(self):
         """Advance the 'pos' pointer and set the 'current_char' variable."""
