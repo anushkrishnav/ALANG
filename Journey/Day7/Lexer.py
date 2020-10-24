@@ -1,15 +1,10 @@
 from Token import Token
-# from interpreter import main
-
-INTEGER, PLUS, EOF, RPAR = 'INTEGER',  'PLUS', 'EOF', 'RPAR'
-MINUS, POW, DIV, MUL, LPAR = 'MINUS', 'POW', 'DIV', 'MUL', 'LPAR'
-OPERATORS = {'+': PLUS, '-': MINUS, '^': POW, '/': DIV, '*': MUL}
-BRACKETS = {'(': LPAR, ')': RPAR}
-
-
+INTEGER,PLUS,EOF,MINUS,POW,DIV,MUL,LPAR,RPAR = 'INTEGER', 'PLUS', 'EOF','MINUS','POW','DIV','MUL', 'LPAR' , 'RPAR'
+OPERATORS={'+':PLUS,'-':MINUS,'^' :POW,'/':DIV,'*':MUL}
+BRACKETS={'(':LPAR,')':RPAR}
 class Lexer(object):
-    def __init__(self, text):
-        # client string input,  e.g. "3 + 5",  "12 - 5",  etc
+    def __init__(self,text):
+                # client string input, e.g. "3 + 5", "12 - 5", etc
         self.text = text
         # self.pos is an index into self.text
         self.pos = 0
@@ -17,9 +12,10 @@ class Lexer(object):
     ######################
     # Lexer code         #
     ######################
+    
 
     def Error(self):
-        raise ValueError('Invalid char ')
+        raise Exception('Invalid char ')
 
     def Advance(self):
         """Advance the 'pos' pointer and set the 'current_char' variable."""
@@ -55,19 +51,17 @@ class Lexer(object):
                 continue
 
             if self.current_char in BRACKETS.keys():
-                token = Token(BRACKETS.get(self.current_char),
-                              self.current_char)
+                token=Token(BRACKETS.get(self.current_char),self.current_char)
                 self.Advance()
                 return token
 
             if self.current_char.isdigit():
-                return Token(INTEGER,  self.Integer())
+                return Token(INTEGER, self.Integer())
 
             if self.current_char in OPERATORS.keys():
-                token = Token(OPERATORS.get(self.current_char),
-                              self.current_char)
+                token=Token(OPERATORS.get(self.current_char),self.current_char)
                 self.Advance()
                 return token
             self.Error()
 
-        return Token(EOF,  None)
+        return Token(EOF, None)
