@@ -1,5 +1,6 @@
 from Token import Token
 from Lexer import Lexer
+
 INTEGER, PLUS, EOF, RPAR = 'INTEGER',  'PLUS', 'EOF', 'RPAR'
 MINUS, POW, DIV, MUL, LPAR = 'MINUS', 'POW', 'DIV', 'MUL', 'LPAR'
 OPERATORS = {'+': PLUS, '-': MINUS, '^': POW, '/': DIV, '*': MUL}
@@ -34,7 +35,6 @@ class NodeVisitor(object):
     def visit(self, node):
         method_name = 'visit_' + type(node).__name__
         visitor = getattr(self, method_name, self.generic_visit)
-        print(node)
         return visitor(node)
 
     def generic_visit(self, node):
