@@ -1,5 +1,5 @@
-from Token import Token
-from Lexer import Lexer
+import sys, os
+sys.path.append(os.path.abspath("SOURCECODE"))
 
 INTEGER, PLUS, EOF, RPAR = 'INTEGER',  'PLUS', 'EOF', 'RPAR'
 MINUS, POW, DIV, MUL, LPAR = 'MINUS', 'POW', 'DIV', 'MUL', 'LPAR'

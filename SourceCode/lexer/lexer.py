@@ -1,10 +1,17 @@
-from Token import Token
+import sys, os
+sys.path.append(os.path.abspath("SOURCECODE"))
+from token.token import Token
 # from interpreter import main
 
 INTEGER, PLUS, EOF, RPAR = 'INTEGER',  'PLUS', 'EOF', 'RPAR'
 MINUS, POW, DIV, MUL, LPAR = 'MINUS', 'POW', 'DIV', 'MUL', 'LPAR'
 OPERATORS = {'+': PLUS, '-': MINUS, '^': POW, '/': DIV, '*': MUL}
 BRACKETS = {'(': LPAR, ')': RPAR}
+ASSIGN, DOT, SEMI, ID = 'ASSIGN', 'DOT', 'SEMI', 'ID'
+KEYWORDS = {
+    'START': Token('START', 'START'),
+    'STOP': Token('STOP', 'STOP'),
+}
 
 
 class Lexer(object):
@@ -17,6 +24,13 @@ class Lexer(object):
     ######################
     # Lexer code         #
     ######################
+
+    def peek(self):
+        peek_pos = self.pos + 1
+        if peek_pos > len(self.text)-1:
+            return None
+        else:
+            return self.tect[peek_pos]
 
     def Error(self):
         raise ValueError('Invalid char ')
@@ -32,6 +46,16 @@ class Lexer(object):
     def Skip_Whitespace(self):
         while self.current_char is not None and self.current_char.isspace():
             self.Advance()
+
+    def _id(self):
+        """Handle identifiers and reserved keywords"""
+        result = ''
+        while self.current_char is not None and self.current_char.isalnum():
+            result += self.current_char
+            self.Advance()
+
+        token = KEYWORDS.get(result, Token(ID, result))
+        return token
 
     def Integer(self):
         """Return a (multidigit) Integer consumed from the input."""
@@ -49,11 +73,26 @@ class Lexer(object):
         apart into tokens.
         """
         while self.current_char is not None:
-
             if self.current_char.isspace():
                 self.Skip_Whitespace()
                 continue
 
+            if self.current_char.isalpha():
+                return self._id()
+
+            if self.current_char == '=':
+                self.Advance()
+                self.Advance()
+                return Token(ASSIGN, '=')
+
+            if self.current_char == ';':
+                self.Advance()
+                return Token(SEMI, ';')
+
+            if self.current_char == '.':
+                self.Advance()
+                return Token(DOT, '.')
+            
             if self.current_char in BRACKETS.keys():
                 token = Token(BRACKETS.get(self.current_char),
                               self.current_char)

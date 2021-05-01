@@ -1,10 +1,7 @@
-# from Token import Token
-from Lexer import Lexer
-from ASTree import NodeVisitor, Num, BinOP, UnaryOP
+import sys, os
+sys.path.append(os.path.abspath("SOURCECODE"))
+from abstract_syntax_tree.AST import Num, BinOP, UnaryOP
 
-# Token types
-# EOF (end-of-file) token is used to indicate that
-# there is no more input left for lexical analysis
 INTEGER, PLUS, EOF, RPAR = 'INTEGER',  'PLUS', 'EOF', 'RPAR'
 MINUS, POW, DIV, MUL, LPAR = 'MINUS', 'POW', 'DIV', 'MUL', 'LPAR'
 OPERATORS = {'+': PLUS, '-': MINUS, '^': POW, '/': DIV, '*': MUL}
@@ -21,7 +18,6 @@ class Parser(object):
     ##############################
     def Error(self):
         print('invalid syntax')
-        main()
 
     def eat(self,  token_type):
         # compare the current token type with the passed token
@@ -97,62 +93,3 @@ class Parser(object):
         if self.current_token.type != EOF:
             self.Error()
         return node
-
-
-class Interpreter(NodeVisitor):
-    def __init__(self, parser):
-        self.parser = parser
-
-    def visit_UnaryOP(self, node):
-        op = node.op.type
-        if op == PLUS:
-            return +self.visit(node.expr)
-        if op == MINUS:
-            return -self.visit(node.expr)
-
-    def visit_BinOP(self, node):
-        if node.op.value == '-':
-            result = self.visit(node.left) - self.visit(node.right)
-            return result
-        if node.op.value == '+':
-            result = self.visit(node.left) + self.visit(node.right)
-            return result
-        if node.op.value == '*':
-            result = self.visit(node.left) * self.visit(node.right)
-            return result
-        if node.op.value == '/':
-            if self.visit(node.right) == 0:
-                raise ValueError("You cannot divide a number by 0")
-            result = self.visit(node.left) / self.visit(node.right)
-            return result
-        if node.op.value == '^':
-            result = self.visit(node.left)**self.visit(node. righ)
-            return result
-
-    def visit_Num(self, node):
-        return node.value
-
-    def interpret(self):
-        tree = self.parser.parse()
-        if tree is None:
-            return ''
-        return self.visit(tree)
-
-
-if __name__ == '__main__':
-    def main():
-        while True:
-            try:
-                # To run under Python3 replace 'raw_input' call
-                # with 'input'
-                text = input('alng >>')
-            except EOFError:
-                break
-            if not text:
-                continue
-            lexer = Lexer(text)
-            parser = Parser(lexer)
-            interpreter = Interpreter(parser)
-            result = interpreter.interpret()
-            print(result)
-    main()

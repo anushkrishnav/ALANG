@@ -133,7 +133,7 @@ class Num(AST):
         self.value = token.value
 
 
-class UnaryOp(AST):
+class UnaryOP(AST):
     def __init__(self, op, expr):
         self.token = self.op = op
         self.expr = expr
@@ -163,11 +163,11 @@ class Parser(object):
         token = self.current_token
         if token.type == PLUS:
             self.eat(PLUS)
-            node = UnaryOp(token, self.factor())
+            node = UnaryOP(token, self.factor())
             return node
         elif token.type == MINUS:
             self.eat(MINUS)
-            node = UnaryOp(token, self.factor())
+            node = UnaryOP(token, self.factor())
             return node
         elif token.type == INTEGER:
             self.eat(INTEGER)
@@ -253,7 +253,7 @@ class Interpreter(NodeVisitor):
     def visit_Num(self, node):
         return node.value
 
-    def visit_UnaryOp(self, node):
+    def visit_UnaryOP(self, node):
         op = node.op.type
         if op == PLUS:
             return +self.visit(node.expr)
