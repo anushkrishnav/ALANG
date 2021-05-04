@@ -1,3 +1,10 @@
+"""
+interpreter.py
+====================================
+The core module of ALANG
+This module contains the the interpreter class
+"""
+
 import sys, os
 sys.path.append(os.path.abspath("SOURCECODE"))
 
