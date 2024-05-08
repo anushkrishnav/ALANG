@@ -6,7 +6,7 @@
 Interpreter Implemented in Python 
 ## Alang stands for (Anush Language) Unless I find a better expansion 
 <br/>
-Hope the project is good  cause... well... it got my name for starter  XD.<br/>
+
 I use python for the interpreter implementation since I am very comfortable with it.
 I am not going to use a virtual environment since I have decided to build this interpreter by using the inbuilt modules and self created methods.
 
